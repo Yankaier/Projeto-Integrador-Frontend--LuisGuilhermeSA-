@@ -1,8 +1,259 @@
-header {
-    display: flex;
-    justify-content: center;
-    background-color: #dedede;
-    margin: 0;
-    padding: 0; 
+/* Sistema de Visualização de Pacientes — identidade clínica azul/verde */
 
+:root {
+	--primary: #1769aa;
+	--primary-dark: #0d4775;
+	--secondary: #16857a;
+	--background: #f3f8fb;
+	--surface: #ffffff;
+	--text: #193247;
+	--muted: #5d7180;
+	--border: #d6e3eb;
+	--focus: #8ed9d0;
+	--shadow: 0 10px 30px rgba(25, 70, 96, 0.1);
+	--radius: 12px;
+	--space: 1rem;
+	font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	color: var(--text);
+	background: var(--background);
+	line-height: 1.5;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 1rem clamp(1rem, 4vw, 4rem);
+	background: var(--surface);
+	border-bottom: 1px solid var(--border);
+	box-shadow: 0 2px 12px rgba(25, 70, 96, 0.06);
+}
+
+header img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+}
+
+h1, h2 {
+	margin: 0;
+	color: var(--primary-dark);
+	line-height: 1.2;
+}
+
+h1 {
+	font-size: clamp(1.5rem, 3vw, 2.1rem);
+	margin-right: auto;
+}
+
+nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .35rem;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+nav a {
+	display: block;
+	padding: .55rem .8rem;
+	color: var(--primary-dark);
+	font-weight: 600;
+	text-decoration: none;
+	border-radius: 8px;
+}
+
+nav a:hover, nav a:focus-visible {
+	color: var(--surface);
+	background: var(--primary);
+}
+
+main {
+	width: min(1100px, calc(100% - 2rem));
+	margin: 2rem auto;
+}
+
+form, section, table {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow);
+}
+
+form {
+	max-width: 680px;
+	padding: clamp(1rem, 3vw, 2rem);
+	margin: 0 auto 2rem;
+}
+
+fieldset {
+	min-width: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+legend {
+	padding: 0;
+	margin-bottom: 1.25rem;
+	color: var(--primary-dark);
+	font-size: 1.3rem;
+	font-weight: 700;
+}
+
+form div {
+	margin-bottom: 1rem;
+}
+
+label {
+	display: block;
+	margin-bottom: .4rem;
+	color: var(--text);
+	font-weight: 600;
+}
+
+input {
+	width: 100%;
+	min-height: 46px;
+	padding: .7rem .8rem;
+	color: var(--text);
+	background: #fbfdfe;
+	border: 1px solid #abc2cf;
+	border-radius: 8px;
+	font: inherit;
+}
+
+input:focus {
+	outline: 3px solid var(--focus);
+	border-color: var(--primary);
+}
+
+button {
+	width: 100%;
+	min-height: 46px;
+	padding: .7rem 1.25rem;
+	color: var(--surface);
+	background: var(--secondary);
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+	font-weight: 700;
+	transition: background .2s ease, transform .2s ease;
+}
+
+button:hover, button:focus-visible {
+	background: #0d685f;
+}
+
+button:active {
+	transform: translateY(1px);
+}
+
+section {
+	display: inline-block;
+	width: calc(50% - .6rem);
+	min-height: 130px;
+	padding: 1.35rem;
+	margin: 0 .75rem 1.5rem 0;
+	vertical-align: top;
+}
+
+section:nth-of-type(2) {
+	margin-right: 0;
+}
+
+section h2 {
+	margin-bottom: .55rem;
+	font-size: 1.25rem;
+}
+
+section p {
+	margin: 0;
+	color: var(--muted);
+}
+
+table {
+	width: 100%;
+	overflow: hidden;
+	border-collapse: separate;
+	border-spacing: 0;
+	text-align: left;
+}
+
+th, td {
+	padding: .9rem 1rem;
+	border-bottom: 1px solid var(--border);
+}
+
+th {
+	color: var(--surface);
+	background: var(--primary);
+	font-size: .9rem;
+	letter-spacing: .02em;
+}
+
+tr:last-child td {
+	border-bottom: 0;
+}
+
+tr:nth-child(even) td {
+	background: #f6fafc;
+}
+
+footer {
+	min-height: 2rem;
+}
+
+@media (max-width: 700px) {
+	header {
+		flex-wrap: wrap;
+		justify-content: center;
+		text-align: center;
+	}
+
+	header img {
+		width: 76px;
+		height: 76px;
+	}
+
+	h1 {
+		margin-right: 0;
+	}
+
+	nav {
+		width: 100%;
+	}
+
+	nav ul {
+		justify-content: center;
+	}
+
+	section {
+		display: block;
+		width: 100%;
+		margin-right: 0;
+	}
+
+	table {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		transition-duration: .01ms !important;
+	}
 }
