@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de visualização e agendamento de pacientes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Visualização de pacientes</title>
 </head>
 <body>
 
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
     <!-- Cabeçalho e navegação principal -->
-    <header>
-        <a href="#inicio" aria-label="Ir para o início">
-            <img src="https://cdn.oreateai.com/agentskill/7ab0c0b44f192455ca2d3aa4/multimedia/63f646e291c4da649b4bd267.png" width="200" height="200" alt="Logomarca do sistema de agendamentos">
-        </a>
-        <h1 id="inicio">Visualização de pacientes</h1>
-        <nav>
-            <h2 class="sr-only">Navegação principal</h2>
-            <ul>
+    <header class="cabecalho">
+        <div class="cabecalho__marca">
+            <a href="#inicio" aria-label="Ir para o início" class="cabecalho__logo-link">
+                <img class="cabecalho__logo" src="https://cdn.oreateai.com/agentskill/7ab0c0b44f192455ca2d3aa4/multimedia/63f646e291c4da649b4bd267.png" width="48" height="48" alt="Logomarca do sistema de agendamentos">
+            </a>
+            <h1 id="inicio" class="cabecalho__titulo">Visualização de pacientes</h1>
+        </div>
+        <nav class="nav-principal" aria-label="Navegação principal">
+            <ul class="nav-principal__lista">
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#agendados">Agendados</a></li>
                 <li><a href="#filtros">Filtros</a></li>
@@ -25,66 +32,92 @@
         </nav>
     </header>
 
-    <main>
+    <main id="conteudo">
+        <!-- Resumo -->
+        <section class="secao secao--resumo" aria-labelledby="titulo-resumo">
+            <h2 id="titulo-resumo">Agenda de hoje</h2>
+            <p>Acompanhe os pacientes e o status dos atendimentos.</p>
+            <dl class="resumo-cards">
+                <div class="resumo-card">
+                    <dt>Confirmados</dt>
+                    <dd id="contagem-confirmado">0</dd>
+                </div>
+                <div class="resumo-card">
+                    <dt>Pendentes</dt>
+                    <dd id="contagem-pendente">0</dd>
+                </div>
+                <div class="resumo-card">
+                    <dt>Cancelados</dt>
+                    <dd id="contagem-cancelado">0</dd>
+                </div>
+            </dl>
+        </section>
+
         <!-- Cadastro de paciente -->
-        <section id="novo-agendamento" aria-labelledby="titulo-formulario">
-            <form action="#" method="post">
-            <fieldset>
-                <legend id="titulo-formulario">Novo agendamento</legend>
-                <div>
-                    <label for="nome-paciente">Nome completo</label>
-                    <input type="text" id="nome-paciente" name="nome" autocomplete="name" pattern="[A-Za-zÀ-ÿ ]+" required>
-                </div>
-                <div>
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                </div>
-                <div>
-                    <label for="contato">Contato</label>
-                    <input type="tel" id="contato" name="contato" autocomplete="tel" inputmode="tel" required>
-                </div>
-                <div>
-                    <label for="data-agendamento">Data do agendamento</label>
-                    <input type="date" id="data-agendamento" name="data" required>
-                </div>
-                <div>
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option value="pendente">Pendente</option>
-                        <option value="confirmado">Confirmado</option>
-                        <option value="cancelado">Cancelado</option>
-                    </select>
-                </div>
-                <button type="submit">Salvar agendamento</button>
-            </fieldset>
+        <section id="novo-agendamento" class="secao secao--formulario" aria-labelledby="titulo-formulario">
+            <form id="form-agendamento" class="formulario" novalidate>
+                <fieldset>
+                    <legend id="titulo-formulario">Novo agendamento</legend>
+
+                    <div class="campo">
+                        <label for="nome-paciente">Nome completo</label>
+                        <input type="text" id="nome-paciente" name="nome" autocomplete="name" pattern="[A-Za-zÀ-ÿ ]+" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="contato">Contato</label>
+                        <input type="tel" id="contato" name="contato" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="data-agendamento">Data do agendamento</label>
+                        <input type="date" id="data-agendamento" name="data" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="status">Status</label>
+                        <div class="select-wrapper">
+                            <select id="status" name="status">
+                                <option value="pendente">Pendente</option>
+                                <option value="confirmado">Confirmado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="botao botao--primario">Salvar agendamento</button>
+                    <p class="formulario__aviso" role="note">Este formulário ainda não está conectado a um servidor: os dados enviados são adicionados apenas à lista abaixo, nesta sessão.</p>
+                </fieldset>
             </form>
         </section>
 
-        <!-- Resumo e filtros -->
-        <section aria-labelledby="titulo-resumo">
-            <h2 id="titulo-resumo">Agenda de hoje</h2>
-            <p>Acompanhe os pacientes e o status dos atendimentos.</p>
-        </section>
-        <section id="filtros" aria-labelledby="titulo-filtros">
+        <!-- Filtros -->
+        <section id="filtros" class="secao secao--filtros" aria-labelledby="titulo-filtros">
             <h2 id="titulo-filtros">Filtrar pacientes</h2>
-            <form action="#agendados" method="get">
-                <div>
+            <form id="form-filtros" class="formulario formulario--inline">
+                <div class="campo">
                     <label for="busca">Buscar por nome</label>
                     <input type="search" id="busca" name="busca" placeholder="Digite um nome">
                 </div>
-                <div>
+                <div class="campo">
                     <label for="data-filtro">Filtrar por data</label>
                     <input type="date" id="data-filtro" name="data-filtro">
                 </div>
-                <button type="submit">Aplicar filtros</button>
+                <button type="submit" class="botao botao--secundario">Aplicar filtros</button>
+                <button type="reset" class="botao botao--texto" id="limpar-filtros">Limpar</button>
             </form>
         </section>
 
         <!-- Lista de pacientes -->
-        <section id="agendados" aria-labelledby="titulo-agendados">
+        <section id="agendados" class="secao secao--tabela" aria-labelledby="titulo-agendados">
             <h2 id="titulo-agendados">Pacientes agendados</h2>
             <div class="table-wrapper">
-                <table>
+                <table id="tabela-pacientes">
                     <caption class="sr-only">Lista de pacientes agendados</caption>
                     <thead>
                         <tr>
@@ -94,38 +127,51 @@
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="corpo-tabela-pacientes">
                         <tr>
-                            <td>Fulano da Silva</td>
-                            <td>(43) 98870-9107</td>
-                            <td>23/04/2000</td>
-                            <td>Confirmado</td>
+                            <td data-rotulo="Nome">Fulano da Silva</td>
+                            <td data-rotulo="Contato">(43) 98870-9107</td>
+                            <td data-rotulo="Data">23/04/2000</td>
+                            <td data-rotulo="Status"><span class="status status--confirmado">Confirmado</span></td>
                         </tr>
                         <tr>
-                            <td>Ciclano da Silva</td>
-                            <td>(83) 00000-0000</td>
-                            <td>28/05/2000</td>
-                            <td>Pendente</td>
+                            <td data-rotulo="Nome">Ciclano da Silva</td>
+                            <td data-rotulo="Contato">(83) 00000-0000</td>
+                            <td data-rotulo="Data">28/05/2000</td>
+                            <td data-rotulo="Status"><span class="status status--pendente">Pendente</span></td>
                         </tr>
                         <tr>
-                            <td>Beltrano da Silva</td>
-                            <td>(87) 98760-4312</td>
-                            <td>29/07/2000</td>
-                            <td>Confirmado</td>
+                            <td data-rotulo="Nome">Beltrano da Silva</td>
+                            <td data-rotulo="Contato">(87) 98760-4312</td>
+                            <td data-rotulo="Data">29/07/2000</td>
+                            <td data-rotulo="Status"><span class="status status--confirmado">Confirmado</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <p id="mensagem-vazia" class="mensagem-vazia" hidden>Nenhum paciente encontrado para os filtros aplicados.</p>
         </section>
-        <section aria-labelledby="titulo-nao-agendados">
+
+        <section class="secao secao--nao-agendados" aria-labelledby="titulo-nao-agendados">
             <h2 id="titulo-nao-agendados">Pacientes não agendados</h2>
             <p>Não há pacientes aguardando agendamento.</p>
         </section>
     </main>
 
-    <footer>
-        <p>Sistema de visualização de pacientes &copy; 2024</p>
+    <footer class="rodape">
+        <div class="rodape__conteudo">
+            <p class="rodape__marca">Sistema de visualização de pacientes</p>
+            <nav aria-label="Links do rodapé" class="rodape__nav">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#novo-agendamento">Novo agendamento</a></li>
+                    <li><a href="#agendados">Agendados</a></li>
+                </ul>
+            </nav>
+            <p class="rodape__copy">&copy; 2024 &mdash; Todos os direitos reservados.</p>
+        </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
