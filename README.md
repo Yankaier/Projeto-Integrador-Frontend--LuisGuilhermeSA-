@@ -24,11 +24,11 @@ A identidade visual do projeto segue uma paleta de cores **azul clínico**, tran
 
 ## ✨ Funcionalidades
 
-- [ ] Listagem de pacientes agendados
-- [ ] Filtro por data / horário
-- [ ] Busca por nome do paciente
-- [ ] Indicação de status do agendamento (confirmado, pendente, cancelado)
-- [ ] Interface responsiva
+- [x] Listagem de pacientes agendados
+- [x] Filtro por data / horário
+- [x] Busca por nome do paciente
+- [x] Indicação de status do agendamento (confirmado, pendente, cancelado)
+- [x] Interface responsiva
 
 
 

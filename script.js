@@ -1,5 +1,4 @@
-// Dá processamento real ao formulário de agendamento (antes só tinha action="#")
-// e aos filtros de busca, sem depender de um back-end.
+
 
 const formAgendamento = document.getElementById('form-agendamento');
 const formFiltros = document.getElementById('form-filtros');
@@ -94,8 +93,7 @@ limparFiltrosBtn.addEventListener('click', () => {
     setTimeout(aplicarFiltros, 0);
 });
 
-// Garante que as linhas iniciais (vindas do HTML) tenham os data-attributes
-// usados pelos filtros, já que foram escritas estaticamente na página.
+
 corpoTabela.querySelectorAll('tr').forEach((linha) => {
     if (!linha.dataset.nome) {
         const nome = linha.children[0].textContent.trim();
